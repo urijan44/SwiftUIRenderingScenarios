@@ -15,6 +15,7 @@ struct Book: Hashable, Identifiable {
   let title: String
   let author: String
   var isBookmarked: Bool
+  var review = ""
 
   mutating
   func setBookmark(bookmark: Bool) {
@@ -28,13 +29,17 @@ struct BookListView: View {
   var body: some View {
     ScrollView {
       LazyVStack {
-        ForEach($dataModel.filteredBooks, id: \.id) { book in
-          BookListCell(book: book)
-            .environmentObject(dataModel)
-            .transition(.opacity)
+        ForEach($dataModel.books, id: \.id) { book in
+          NavigationLink {
+            BookDetailView(book: book)
+          } label: {
+            BookListCell(book: book)
+              .environmentObject(dataModel)
+              .transition(.opacity)
+          }
         }
       }
-      .animation(.easeIn(duration: 0.3), value: dataModel.filteredBooks)
+      .animation(.easeIn(duration: 0.3), value: dataModel.books)
       .searchable(text: $dataModel.searchText)
       .navigationTitle("Books")
       .navigationBarTitleDisplayMode(.large)
@@ -51,7 +56,6 @@ struct SotwithDDPreview: PreviewProvider {
 extension BookListView {
   final class ViewModel: ObservableObject {
     @Published var books: [Book] = []
-    @Published var filteredBooks: [Book] = []
     @Published var searchText = ""
     private var cancellables = Set<AnyCancellable>()
     init() {
@@ -61,31 +65,6 @@ extension BookListView {
         Book(imageURL: "book3", title: "달러구트 꿈 백화점", author: "이미예", isBookmarked: false),
         Book(imageURL: "book4", title: "오은영의 화해", author: "오은영", isBookmarked: false),
       ]
-
-      $books
-        .map { [unowned self] books in
-          let filtered = books.filter { book in
-            return book.title.hasPrefix(searchText) || book.author.hasPrefix(searchText)
-          }
-          return filtered
-      }
-        .sink { [unowned self] books in
-          filteredBooks = books
-        }
-        .store(in: &cancellables)
-
-      $searchText
-        .debounce(for: 0.5, scheduler: DispatchQueue.main)
-        .map { [unowned self] keyword -> [Book] in
-          let filtered = books.filter { book in
-            return book.title.hasPrefix(keyword) || book.author.hasPrefix(keyword)
-          }
-          return filtered
-        }
-        .sink { [unowned self] books in
-            self.filteredBooks = books
-        }
-        .store(in: &cancellables)
     }
 
     func setBookmark(book: Book) {
@@ -112,6 +91,9 @@ struct BookListCell: View {
         Text(book.author)
           .font(.caption)
           .foregroundColor(.gray)
+        Text(book.review)
+          .font(.footnote)
+          .foregroundColor(.primary)
       }
       Spacer()
       Button {
