@@ -14,10 +14,16 @@ struct ContentView: View {
       Form {
         Section("Source of truth / Derived Data") {
           NavigationLink {
-            SotwithDD()
+            BookListView()
           } label: {
             Text("Source of Truth / Derived Data")
           }
+          NavigationLink {
+            ViewInitCheck()
+          } label: {
+            Text("View init Check")
+          }
+
         }
       }
     }
