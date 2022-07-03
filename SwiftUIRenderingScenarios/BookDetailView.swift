@@ -6,35 +6,36 @@
 //
 
 import SwiftUI
+import Combine
 
 struct BookDetailView: View {
   enum Field: Hashable {
          case review
   }
-  @Binding var book: Book
+  @StateObject var viewModel = ViewModel()
   @FocusState private var focus: Field?
 
   var body: some View {
     ScrollView {
       VStack(alignment: .leading) {
-        Image(book.imageURL)
+        Image(viewModel.book.imageURL)
           .resizable()
           .aspectRatio(nil ,contentMode: .fit)
           .frame(height: UIScreen.main.bounds.height * 0.4)
           .overlay(
             Button(action: {
-              book.isBookmarked.toggle()
+              viewModel.setBookmark()
             }, label: {
-              Image(systemName: book.isBookmarked ? "bookmark.fill" : "bookmark")
+              Image(systemName: viewModel.book.isBookmarked ? "bookmark.fill" : "bookmark")
                 .font(.largeTitle.weight(.bold))
                 .foregroundColor(.yellow)
             })
             .frame(maxWidth: .infinity, maxHeight: .infinity,  alignment: .bottomTrailing)
 
           )
-        Text(book.title)
+        Text(viewModel.book.title)
           .font(.body)
-        Text(book.author)
+        Text(viewModel.book.author)
           .font(.caption)
           .foregroundColor(.gray)
       }
@@ -47,7 +48,7 @@ struct BookDetailView: View {
       Text("리뷰 작성")
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
-      TextEditor(text: $book.review)
+      TextEditor(text: $viewModel.book.review)
         .frame(height: 250)
         .focused($focus, equals: .review)
     }
@@ -57,14 +58,37 @@ struct BookDetailView: View {
     }
   }
 
-  init(book: Binding<Book>) {
-    self._book = book
-    print(book.wrappedValue.title, "detail view init")
+  init() {
+    print("detail view init")
   }
 }
 
-//struct BookDetailView_Previews: PreviewProvider {
-//  static var previews: some View {
-//    BookDetailView(book: .constant(Book(imageURL: "book1", title: "파친코", author: "이민진", isBookmarked: false)))
-//  }
-//}
+extension BookDetailView {
+  final class ViewModel: ObservableObject {
+    private let appState = AppState.shared
+    @Published var book: Book = Book(imageURL: "", title: "", author: "", isBookmarked: false)
+    private var cancellables = Set<AnyCancellable>()
+
+    init() {
+      fetch()
+    }
+
+    func fetch() {
+      book = appState.books[appState.currentBookIndex]
+
+      self.$book
+        .map(\.review)
+        .sink(receiveValue: setReview(review:))
+        .store(in: &cancellables)
+    }
+
+    func setBookmark() {
+      book.isBookmarked.toggle()
+      appState.updateBook(book: book)
+    }
+
+    func setReview(review: String) {
+      appState.updateBook(book: book)
+    }
+  }
+}

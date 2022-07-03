@@ -21,21 +21,27 @@ struct Book: Hashable, Identifiable {
   func setBookmark(bookmark: Bool) {
     self.isBookmarked = bookmark
   }
+
+  static func == (lhs: Book, rhs: Book) -> Bool {
+    lhs.id == rhs.id
+  }
 }
 
 //MARK: - View
 struct BookListView: View {
   @StateObject var dataModel = ViewModel()
+  @State var navigationTrigger = false
   var body: some View {
     ScrollView {
-      LazyVStack {
+      VStack {
+        navigationLinkSection()
         ForEach($dataModel.books, id: \.id) { book in
-          NavigationLink {
-            BookDetailView(book: book)
+          Button {
+            showDetailView(book: book.wrappedValue)
           } label: {
             BookListCell(book: book)
-              .environmentObject(dataModel)
               .transition(.opacity)
+              .environmentObject(dataModel)
           }
         }
       }
@@ -44,6 +50,22 @@ struct BookListView: View {
       .navigationTitle("Books")
       .navigationBarTitleDisplayMode(.large)
     }
+    .onAppear {
+      dataModel.fetch()
+    }
+  }
+
+  func navigationLinkSection() -> some View {
+    NavigationLink(isActive: $navigationTrigger) {
+      BookDetailView()
+    } label: {
+      EmptyView()
+    }
+  }
+
+  func showDetailView(book: Book) {
+    dataModel.showDetailView(book: book)
+    navigationTrigger.toggle()
   }
 }
 
@@ -55,21 +77,24 @@ struct SotwithDDPreview: PreviewProvider {
 
 extension BookListView {
   final class ViewModel: ObservableObject {
+    private let appState = AppState.shared
     @Published var books: [Book] = []
     @Published var searchText = ""
     private var cancellables = Set<AnyCancellable>()
     init() {
-      books = [
-        Book(imageURL: "book1", title: "파친코", author: "이민진", isBookmarked: false),
-        Book(imageURL: "book2", title: "돈, 뜨겁게 사랑하고 차갑게 다루어라", author: "앙드레 코스톨라니", isBookmarked: false),
-        Book(imageURL: "book3", title: "달러구트 꿈 백화점", author: "이미예", isBookmarked: false),
-        Book(imageURL: "book4", title: "오은영의 화해", author: "오은영", isBookmarked: false),
-      ]
+    }
+
+    func fetch() {
+      books = appState.books
     }
 
     func setBookmark(book: Book) {
-      guard let index = books.firstIndex(of: book) else { return }
-      books[index].isBookmarked.toggle()
+      guard let index = appState.books.firstIndex(of: book) else { return }
+      appState.books[index].isBookmarked.toggle()
+    }
+
+    func showDetailView(book: Book) {
+      appState.prepareEditingDetail(book: book)
     }
   }
 }
