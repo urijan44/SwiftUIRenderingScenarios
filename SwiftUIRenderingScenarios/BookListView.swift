@@ -50,8 +50,8 @@ struct SotwithDDPreview: PreviewProvider {
 
 extension BookListView {
   final class ViewModel: ObservableObject {
-    @Published private var books: [Book] = []
-    var filteredBooks: [Book] = []
+    @Published var books: [Book] = []
+    @Published var filteredBooks: [Book] = []
     @Published var searchText = ""
     private var cancellables = Set<AnyCancellable>()
     init() {
@@ -62,9 +62,11 @@ extension BookListView {
         Book(imageURL: "book4", title: "오은영의 화해", author: "오은영", isBookmarked: false),
       ]
 
+      filteredBooks = books
+
       $books
         .sink { [unowned self] books in
-          filteredBooks = books
+          print("books chanhged")
         }
         .store(in: &cancellables)
 
@@ -91,7 +93,6 @@ extension BookListView {
 }
 
 struct BookListCell: View {
-  @EnvironmentObject var viewModel: BookListView.ViewModel
   @Binding var book: Book
   var body: some View {
     HStack(alignment: .top) {
@@ -110,7 +111,7 @@ struct BookListCell: View {
       }
       Spacer()
       Button {
-        viewModel.setBookmark(book: book)
+        book.isBookmarked.toggle()
       } label: {
         Image(systemName: book.isBookmarked ? "bookmark.fill" : "bookmark")
           .foregroundColor(.yellow)
