@@ -8,64 +8,92 @@
 import SwiftUI
 import Combine
 
+//MARK: - Model
+struct Book: Hashable, Identifiable {
+  let id = UUID().uuidString
+  let imageURL: String
+  let title: String
+  let author: String
+  var isBookmarked: Bool
+
+  mutating
+  func setBookmark(bookmark: Bool) {
+    self.isBookmarked = bookmark
+  }
+}
+
+//MARK: - View
 struct SotwithDD: View {
-  @State var title = ""
+  @StateObject var dataModel = ViewModel()
   var body: some View {
-    VStack {
-      Text("Hello, World! \n \(title)")
-      CustomProgressView(totalTime: "100")
-      NavigationLink {
-        SotwithDDDetailView(text: $title)
-      } label: {
-        Text("타이틀 수정하기")
+    ScrollView {
+      LazyVStack {
+        ViewInitTracker()
+        ForEach(dataModel.books, id: \.id) { book in
+          HStack(alignment: .top) {
+            Image(book.imageURL)
+              .resizable()
+              .aspectRatio(nil, contentMode: .fill)
+              .frame(width: 150)
+              .shadow(radius: 4)
+            VStack(alignment: .leading) {
+              Text(book.title)
+                .font(.body)
+                .fontWeight(.bold)
+              Text(book.author)
+                .font(.caption)
+                .foregroundColor(.gray)
+            }
+            Spacer()
+            Button {
+              dataModel.setBookmark(book: book)
+            } label: {
+              Image(systemName: book.isBookmarked ? "bookmark.fill" : "bookmark")
+                .foregroundColor(.yellow)
+                .font(.title)
+            }
+            .padding(.horizontal, 6)
+          }
+          .padding(EdgeInsets(top: 6, leading: 6, bottom: 6, trailing: 6))
+        }
       }
     }
   }
 }
 
-struct SotwithDDDetailView: View {
-  @Binding var text: String
+struct ViewInitTracker: View {
   var body: some View {
-    TextField("수정하기", text: $text)
+    EmptyView()
+  }
+
+  init() {
+    print("View init")
   }
 }
 
-struct SotwithDD_Previews: PreviewProvider {
+struct SotwithDDPreview: PreviewProvider {
   static var previews: some View {
     SotwithDD()
   }
 }
 
-struct CustomProgressView: View {
-  @ObservedObject var viewModel: ViewModel
-  var body: some View {
-    VStack {
-      Text(viewModel.totalTime)
-      ProgressView(value: viewModel.currentProgress, total: 100)
-        .progressViewStyle(.linear)
-      .padding()
-    }
-  }
-
-  init(totalTime: String) {
-    self.viewModel = ViewModel(totalTime: totalTime)
-  }
-}
-extension CustomProgressView {
+extension SotwithDD {
   final class ViewModel: ObservableObject {
-    @Published var totalTime = ""
-    @Published var currentProgress: Double = 0
-    private var cancellables = Set<AnyCancellable>()
-    init(totalTime: String) {
-      self.totalTime = totalTime
-      Timer.publish(every: 0.5, on: .main, in: .default)
-        .autoconnect()
-        .sink { [unowned self] _ in
-          guard currentProgress < 100 else { return }
-          currentProgress += 1
+    @Published var someState: Bool = false
+    @Published var books: [Book] = []
 
-        }
-        .store(in: &cancellables)
+    init() {
+      books = [
+        Book(imageURL: "book1", title: "파친코", author: "이민진", isBookmarked: false),
+        Book(imageURL: "book2", title: "돈, 뜨겁게 사랑하고 차갑게 다루어라", author: "앙드레 코스톨라니", isBookmarked: false),
+        Book(imageURL: "book3", title: "달러구트 꿈 백화점", author: "이미예", isBookmarked: false),
+        Book(imageURL: "book4", title: "오은영의 화해", author: "오은영", isBookmarked: false),
+      ]
+    }
+
+    func setBookmark(book: Book) {
+      guard let index = books.firstIndex(of: book) else { return }
+      books[index].setBookmark(bookmark: !book.isBookmarked)
     }
   }
 }
