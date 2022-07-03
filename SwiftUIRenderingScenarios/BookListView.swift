@@ -62,16 +62,20 @@ extension BookListView {
         Book(imageURL: "book4", title: "오은영의 화해", author: "오은영", isBookmarked: false),
       ]
 
-      filteredBooks = books
-
       $books
+        .map { [unowned self] books in
+          let filtered = books.filter { book in
+            return book.title.hasPrefix(searchText) || book.author.hasPrefix(searchText)
+          }
+          return filtered
+      }
         .sink { [unowned self] books in
-          print("books chanhged")
+          filteredBooks = books
         }
         .store(in: &cancellables)
 
       $searchText
-        .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
+        .debounce(for: 0.5, scheduler: DispatchQueue.main)
         .map { [unowned self] keyword -> [Book] in
           let filtered = books.filter { book in
             return book.title.hasPrefix(keyword) || book.author.hasPrefix(keyword)
@@ -87,12 +91,12 @@ extension BookListView {
     func setBookmark(book: Book) {
       guard let index = books.firstIndex(of: book) else { return }
       books[index].isBookmarked.toggle()
-
     }
   }
 }
 
 struct BookListCell: View {
+  @EnvironmentObject var viewModel: BookListView.ViewModel
   @Binding var book: Book
   var body: some View {
     HStack(alignment: .top) {
@@ -111,7 +115,7 @@ struct BookListCell: View {
       }
       Spacer()
       Button {
-        book.isBookmarked.toggle()
+        viewModel.setBookmark(book: book)
       } label: {
         Image(systemName: book.isBookmarked ? "bookmark.fill" : "bookmark")
           .foregroundColor(.yellow)
