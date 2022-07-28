@@ -12,30 +12,31 @@ struct BookDetailView: View {
   enum Field: Hashable {
          case review
   }
-  @StateObject var viewModel = ViewModel()
+  @EnvironmentObject var viewModel: ViewModel
   @FocusState private var focus: Field?
-
+  @Binding var book: Book
   var body: some View {
     ScrollView {
       VStack(alignment: .leading) {
-        Image(viewModel.book.imageURL)
+        Image(book.imageURL)
           .resizable()
           .aspectRatio(nil ,contentMode: .fit)
           .frame(height: UIScreen.main.bounds.height * 0.4)
           .overlay(
             Button(action: {
-              viewModel.setBookmark()
+              book.isBookmarked.toggle()
+              viewModel.edit(book: book)
             }, label: {
-              Image(systemName: viewModel.book.isBookmarked ? "bookmark.fill" : "bookmark")
+              Image(systemName: book.isBookmarked ? "bookmark.fill" : "bookmark")
                 .font(.largeTitle.weight(.bold))
                 .foregroundColor(.yellow)
             })
             .frame(maxWidth: .infinity, maxHeight: .infinity,  alignment: .bottomTrailing)
 
           )
-        Text(viewModel.book.title)
+        Text(book.title)
           .font(.body)
-        Text(viewModel.book.author)
+        Text(book.author)
           .font(.caption)
           .foregroundColor(.gray)
       }
@@ -48,9 +49,10 @@ struct BookDetailView: View {
       Text("리뷰 작성")
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
-      TextEditor(text: $viewModel.book.review)
-        .frame(height: 250)
-        .focused($focus, equals: .review)
+      TextField("리뷰 작성", text: $book.review)
+        .onSubmit {
+          viewModel.edit(book: book)
+        }
     }
     .padding(.horizontal)
     .onAppear {
@@ -58,37 +60,7 @@ struct BookDetailView: View {
     }
   }
 
-  init() {
-    print("detail view init")
-  }
-}
-
-extension BookDetailView {
-  final class ViewModel: ObservableObject {
-    private let appState = AppState.shared
-    @Published var book: Book = Book(imageURL: "", title: "", author: "", isBookmarked: false)
-    private var cancellables = Set<AnyCancellable>()
-
-    init() {
-      fetch()
-    }
-
-    func fetch() {
-      book = appState.books[appState.currentBookIndex]
-
-      self.$book
-        .map(\.review)
-        .sink(receiveValue: setReview(review:))
-        .store(in: &cancellables)
-    }
-
-    func setBookmark() {
-      book.isBookmarked.toggle()
-      appState.updateBook(book: book)
-    }
-
-    func setReview(review: String) {
-      appState.updateBook(book: book)
-    }
+  init(book: Binding<Book>) {
+    self._book = book
   }
 }

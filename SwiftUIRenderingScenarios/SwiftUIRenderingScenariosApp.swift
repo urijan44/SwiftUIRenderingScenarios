@@ -9,9 +9,28 @@ import SwiftUI
 
 @main
 struct SwiftUIRenderingScenariosApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+  let dependancyContainer = DependancyContainer()
+  var body: some Scene {
+    WindowGroup {
+      ContentView()
+        .environmentObject(dependancyContainer)
     }
+  }
 }
+
+final class DependancyContainer: ObservableObject {
+  let repository = BookListRepository()
+  lazy var bookListViewConfiguration: BookListView.ViewModel = makeBookListViewConfiguration()
+  lazy var bookDetailViewConfiguration = makeBookDetailViewConfiguration()
+  
+  private func makeBookListViewConfiguration() -> BookListView.ViewModel {
+    let viewModel = BookListView.ViewModel(repository: repository)
+    return viewModel
+  }
+  
+  private func makeBookDetailViewConfiguration() -> BookDetailView.ViewModel {
+    let viewModel = BookDetailView.ViewModel(repository: repository)
+    return viewModel
+  }
+}
+
