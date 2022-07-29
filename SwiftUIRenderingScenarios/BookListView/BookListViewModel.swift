@@ -17,16 +17,16 @@ extension BookListView {
     init(repository: BookListRepository) {
       self.repository = repository
       $searchText
+        .debounce(for: 0.5, scheduler: DispatchQueue.main)
         .removeDuplicates()
         .map { [unowned self] word in
           self.repository.fetchBook(keyword: word)
         }
         .assign(to: &$books)
-      
     }
 
     func fetch() {
-      books = repository.fetchBook(keyword: "")
+      books = repository.fetchBook(keyword: searchText)
     }
 
     func setBookmark(book: Book) {

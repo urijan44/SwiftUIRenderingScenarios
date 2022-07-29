@@ -18,25 +18,24 @@ struct BookDetailView: View {
   var body: some View {
     ScrollView {
       VStack(alignment: .leading) {
-        Image(book.imageURL)
+        Image(viewModel.book.imageURL)
           .resizable()
           .aspectRatio(nil ,contentMode: .fit)
           .frame(height: UIScreen.main.bounds.height * 0.4)
           .overlay(
             Button(action: {
-              book.isBookmarked.toggle()
-              viewModel.edit(book: book)
+              viewModel.toogleBookmark()
             }, label: {
-              Image(systemName: book.isBookmarked ? "bookmark.fill" : "bookmark")
+              Image(systemName: viewModel.book.isBookmarked ? "bookmark.fill" : "bookmark")
                 .font(.largeTitle.weight(.bold))
                 .foregroundColor(.yellow)
             })
             .frame(maxWidth: .infinity, maxHeight: .infinity,  alignment: .bottomTrailing)
 
           )
-        Text(book.title)
+        Text(viewModel.book.title)
           .font(.body)
-        Text(book.author)
+        Text(viewModel.book.author)
           .font(.caption)
           .foregroundColor(.gray)
       }
@@ -49,19 +48,16 @@ struct BookDetailView: View {
       Text("리뷰 작성")
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
-      TextField("리뷰 작성", text: $book.review)
-        .onSubmit {
-          viewModel.edit(book: book)
-        }
+      TextField("리뷰 작성", text: $viewModel.book.review)
     }
     .padding(.horizontal)
     .onAppear {
       focus = .review
+      viewModel.fetchBook(book: book)
     }
   }
 
   init(book: Binding<Book>) {
-    print("book detail view init\(book.wrappedValue.title)")
     self._book = book
   }
 }

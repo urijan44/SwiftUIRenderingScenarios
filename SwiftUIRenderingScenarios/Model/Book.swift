@@ -15,6 +15,14 @@ struct Book: Hashable, Identifiable {
   let author: String
   var isBookmarked: Bool
   var review = ""
+  
+  init(imageURL: String, title: String, author: String, isBookmarked: Bool, review: String = "") {
+    self.imageURL = imageURL
+    self.title = title
+    self.author = author
+    self.isBookmarked = isBookmarked
+    self.review = review
+  }
 
   mutating
   func setBookmark(bookmark: Bool) {
@@ -23,5 +31,11 @@ struct Book: Hashable, Identifiable {
 
   static func == (lhs: Book, rhs: Book) -> Bool {
     lhs.id == rhs.id
+  }
+}
+
+extension Book: CustomStringConvertible {
+  var description: String {
+    "\(id), \(title), \(isBookmarked), \(review)"
   }
 }

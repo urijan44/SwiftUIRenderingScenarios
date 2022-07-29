@@ -32,4 +32,8 @@ final class BookListRepository {
       book.title.contains(keyword)
     }
   }
+  
+  func currentBook(book: Book) -> Book? {
+    booksMap[book.id]
+  }
 }
