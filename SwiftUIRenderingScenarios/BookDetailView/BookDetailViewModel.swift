@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 extension BookDetailView {
-  final class ViewModel: ObservableObject {
+  final class DataModel: ObservableObject {
     @Published var book: Book = Book(imageURL: "noImage", title: "", author: "", isBookmarked: false)
     var title: String {
       book.title

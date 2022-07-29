@@ -12,30 +12,30 @@ struct BookDetailView: View {
   enum Field: Hashable {
          case review
   }
-  @EnvironmentObject var viewModel: ViewModel
+  @EnvironmentObject var dataModel: DataModel
   @FocusState private var focus: Field?
   @Binding var book: Book
   var body: some View {
     ScrollView {
       VStack(alignment: .leading) {
-        Image(viewModel.imageURL)
+        Image(dataModel.imageURL)
           .resizable()
           .aspectRatio(nil ,contentMode: .fit)
           .frame(height: UIScreen.main.bounds.height * 0.4)
           .overlay(
             Button(action: {
-              viewModel.toogleBookmark()
+              dataModel.toogleBookmark()
             }, label: {
-              Image(systemName: viewModel.isBookmarked ? "bookmark.fill" : "bookmark")
+              Image(systemName: dataModel.isBookmarked ? "bookmark.fill" : "bookmark")
                 .font(.largeTitle.weight(.bold))
                 .foregroundColor(.yellow)
             })
             .frame(maxWidth: .infinity, maxHeight: .infinity,  alignment: .bottomTrailing)
 
           )
-        Text(viewModel.title)
+        Text(dataModel.title)
           .font(.body)
-        Text(viewModel.author)
+        Text(dataModel.author)
           .font(.caption)
           .foregroundColor(.gray)
       }
@@ -48,15 +48,15 @@ struct BookDetailView: View {
       Text("리뷰 작성")
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
-      TextField("리뷰 작성", text: $viewModel.review)
+      TextField("리뷰 작성", text: $dataModel.review)
         .onSubmit {
-          viewModel.setReview()
+          dataModel.setReview()
         }
     }
     .padding(.horizontal)
     .onAppear {
       focus = .review
-      viewModel.fetchBook(book: book)
+      dataModel.fetchBook(book: book)
     }
   }
 

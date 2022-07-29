@@ -28,8 +28,8 @@ final class DependancyContainer: ObservableObject {
     return viewModel
   }
   
-  private func makeBookDetailViewConfiguration() -> BookDetailView.ViewModel {
-    let viewModel = BookDetailView.ViewModel(repository: repository)
+  private func makeBookDetailViewConfiguration() -> BookDetailView.DataModel {
+    let viewModel = BookDetailView.DataModel(repository: repository)
     return viewModel
   }
 }
