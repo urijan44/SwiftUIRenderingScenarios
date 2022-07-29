@@ -33,7 +33,6 @@ struct BookListView: View {
       .navigationBarTitleDisplayMode(.large)
     }
     .onAppear {
-      print("onAppear")
       dataModel.fetch()
     }
   }

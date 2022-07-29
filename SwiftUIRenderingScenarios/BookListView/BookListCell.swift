@@ -44,6 +44,6 @@ struct BookListCell: View {
 
   init(book: Binding<Book>) {
     self._book = book
-    print("book list cell init \(book)")
+    print("book list cell init \(book.wrappedValue.title)")
   }
 }

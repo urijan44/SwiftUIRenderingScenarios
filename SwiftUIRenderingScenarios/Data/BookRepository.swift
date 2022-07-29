@@ -7,14 +7,9 @@
 
 import Foundation
 final class BookListRepository {
-  private var booksMap: [String: Book] = [:] {
-    didSet {
-      print(booksMap.values.map(\.title), booksMap.values.map(\.review), booksMap.values.map(\.isBookmarked))
-    }
-  }
+  private var booksMap: [String: Book] = [:]
   
   init() {
-    print("Repository")
     [
       Book(imageURL: "book1", title: "파친코", author: "이민진", isBookmarked: false),
       Book(imageURL: "book2", title: "돈, 뜨겁게 사랑하고 차갑게 다루어라", author: "앙드레 코스톨라니", isBookmarked: false),

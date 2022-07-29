@@ -61,6 +61,7 @@ struct BookDetailView: View {
   }
 
   init(book: Binding<Book>) {
+    print("book detail view init\(book.wrappedValue.title)")
     self._book = book
   }
 }
