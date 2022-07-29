@@ -17,19 +17,24 @@ extension BookDetailView {
     init(repository: BookListRepository) {
       self.repository = repository
       
-      $book
-        .filter{ !$0.title.isEmpty }
-        .sink { [unowned self] newBook in
-          edit(book: newBook)
-        }
-        .store(in: &cancellable)
+//      $book
+//        .filter{ !$0.title.isEmpty }
+//        .sink { [unowned self] newBook in
+//          edit(book: newBook)
+//        }
+//        .store(in: &cancellable)
     }
     
     func toogleBookmark() {
       book.isBookmarked.toggle()
+      edit(book: book)
+    }
+    
+    func setReview() {
+      edit(book: book)
     }
 
-    func edit(book: Book) {
+    private func edit(book: Book) {
       repository.updateBook(book: book)
     }
     

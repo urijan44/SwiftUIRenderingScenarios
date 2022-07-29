@@ -49,6 +49,9 @@ struct BookDetailView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
       TextField("리뷰 작성", text: $viewModel.book.review)
+        .onSubmit {
+          viewModel.setReview()
+        }
     }
     .padding(.horizontal)
     .onAppear {
