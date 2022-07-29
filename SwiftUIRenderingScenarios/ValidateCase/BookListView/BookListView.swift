@@ -62,8 +62,6 @@ struct BookListView: View {
   }
 }
 
-
-
 struct SotwithDDPreview: PreviewProvider {
   static var previews: some View {
     BookListView()

@@ -48,6 +48,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		856AA771289399FA001E30CE /* ValidateCase */ = {
+			isa = PBXGroup;
+			children = (
+				85D400D028928902009FC54C /* Data */,
+				85D400CB2892823F009FC54C /* Model */,
+				85D400CC28928249009FC54C /* BookListView */,
+				85D400CD2892825B009FC54C /* BookDetailView */,
+			);
+			path = ValidateCase;
+			sourceTree = "<group>";
+		};
 		85D400CB2892823F009FC54C /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,10 +116,7 @@
 				8A7971DA2871CB9B00EEC73C /* SwiftUIRenderingScenariosApp.swift */,
 				8A7971DC2871CB9B00EEC73C /* ContentView.swift */,
 				8A7971EA2871F7C500EEC73C /* ViewInitCheck.swift */,
-				85D400D028928902009FC54C /* Data */,
-				85D400CB2892823F009FC54C /* Model */,
-				85D400CC28928249009FC54C /* BookListView */,
-				85D400CD2892825B009FC54C /* BookDetailView */,
+				856AA771289399FA001E30CE /* ValidateCase */,
 				8A7971DE2871CB9C00EEC73C /* Assets.xcassets */,
 				8A7971E02871CB9C00EEC73C /* Preview Content */,
 			);
