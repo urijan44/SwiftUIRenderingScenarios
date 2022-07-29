@@ -18,7 +18,7 @@ struct BookDetailView: View {
   var body: some View {
     ScrollView {
       VStack(alignment: .leading) {
-        Image(viewModel.book.imageURL)
+        Image(viewModel.imageURL)
           .resizable()
           .aspectRatio(nil ,contentMode: .fit)
           .frame(height: UIScreen.main.bounds.height * 0.4)
@@ -26,16 +26,16 @@ struct BookDetailView: View {
             Button(action: {
               viewModel.toogleBookmark()
             }, label: {
-              Image(systemName: viewModel.book.isBookmarked ? "bookmark.fill" : "bookmark")
+              Image(systemName: viewModel.isBookmarked ? "bookmark.fill" : "bookmark")
                 .font(.largeTitle.weight(.bold))
                 .foregroundColor(.yellow)
             })
             .frame(maxWidth: .infinity, maxHeight: .infinity,  alignment: .bottomTrailing)
 
           )
-        Text(viewModel.book.title)
+        Text(viewModel.title)
           .font(.body)
-        Text(viewModel.book.author)
+        Text(viewModel.author)
           .font(.caption)
           .foregroundColor(.gray)
       }
@@ -48,7 +48,7 @@ struct BookDetailView: View {
       Text("리뷰 작성")
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
-      TextField("리뷰 작성", text: $viewModel.book.review)
+      TextField("리뷰 작성", text: $viewModel.review)
         .onSubmit {
           viewModel.setReview()
         }

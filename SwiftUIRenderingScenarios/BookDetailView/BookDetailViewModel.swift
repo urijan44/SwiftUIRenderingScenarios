@@ -10,19 +10,37 @@ import Combine
 
 extension BookDetailView {
   final class ViewModel: ObservableObject {
-    @Published var book: Book = Book(imageURL: "", title: "", author: "", isBookmarked: false)
+    @Published var book: Book = Book(imageURL: "noImage", title: "", author: "", isBookmarked: false)
+    var title: String {
+      book.title
+    }
+    
+    var review: String {
+      get {
+        book.review
+      }
+      set {
+        book.review = newValue
+      }
+    }
+    
+    var author: String {
+      book.author
+    }
+    
+    var isBookmarked: Bool {
+      book.isBookmarked
+    }
+    
+    var imageURL: String {
+      book.imageURL
+    }
+    
     private let repository: BookListRepository
     private var cancellable: Set<AnyCancellable> = []
     
     init(repository: BookListRepository) {
       self.repository = repository
-      
-//      $book
-//        .filter{ !$0.title.isEmpty }
-//        .sink { [unowned self] newBook in
-//          edit(book: newBook)
-//        }
-//        .store(in: &cancellable)
     }
     
     func toogleBookmark() {
