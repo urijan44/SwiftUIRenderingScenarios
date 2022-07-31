@@ -7,41 +7,13 @@
 
 import SwiftUI
 import Combine
-import OrderedCollections
-
-final class CoordinatorMap {
-  static let shared = CoordinatorMap()
-  private var triggers: OrderedDictionary<String, MainCoordidnator> = [:]
-  private init() {}
-
-  func push(coordinator: MainCoordidnator) {
-    triggers.updateValue(coordinator, forKey: coordinator.id)
-    print("PUSH", triggers.map(\.value))
-  }
-
-  func popToAll() {
-    triggers.forEach { (_, coordinator) in
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak coordinator] in
-        coordinator?.linkTrigger = false
-      }
-    }
-    triggers.removeSubrange((1..<triggers.count))
-    print(triggers)
-  }
-
-  func remove(coordinator: MainCoordidnator) {
-    triggers.removeValue(forKey: coordinator.id)
-  }
-}
 
 extension Notification.Name {
-  static let popToRootView = Notification.Name("PopToRootView")
+  static let popToRoot = Notification.Name("PopToRoot")
 }
 
 final class MainCoordidnator: ObservableObject {
-  let id = UUID().uuidString
   private let diContainer = DependancyContainer()
-  private let stack = CoordinatorMap.shared
 
   enum Destination {
     case bookList
@@ -50,14 +22,20 @@ final class MainCoordidnator: ObservableObject {
   }
 
   private var destination: Destination = .bookList
+  private var isRoot: Bool
+  private var cancellables = Set<AnyCancellable>()
+  @Published var rootTrigger = false
   @Published var linkTrigger = false
 
-  init() {
-    stack.push(coordinator: self)
-  }
+  init(isRoot: Bool = false) {
+    self.isRoot = isRoot
 
-  deinit {
-    stack.remove(coordinator: self)
+    NotificationCenter.default.publisher(for: .popToRoot)
+      .sink { [weak self] _ in
+        guard let self = self else { return }
+        self.rootTrigger = false
+      }
+      .store(in: &cancellables)
   }
 
   @ViewBuilder
@@ -65,10 +43,19 @@ final class MainCoordidnator: ObservableObject {
     NavigationLink(
       isActive: .init(
         get: { [unowned self] in
-          linkTrigger
+          if isRoot {
+            return rootTrigger
+          } else {
+            return linkTrigger
+          }
         },
         set: { [unowned self] newTrigger in
-          linkTrigger = newTrigger
+          if isRoot {
+            rootTrigger = newTrigger
+          } else {
+            linkTrigger = newTrigger
+          }
+          print(isRoot)
         }
       )
     ) {
@@ -86,10 +73,11 @@ final class MainCoordidnator: ObservableObject {
     } label: {
       EmptyView()
     }
+    .isDetailLink(false)
   }
 
   func popToRootView() {
-    stack.popToAll()
+    NotificationCenter.default.post(name: .popToRoot, object: nil)
   }
 
   func start() {
@@ -110,18 +98,12 @@ final class MainCoordidnator: ObservableObject {
 
   private func toggleLink() {
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [unowned self] in
-      linkTrigger.toggle()
+      if isRoot {
+        rootTrigger.toggle()
+      } else {
+        linkTrigger.toggle()
+      }
     }
-  }
-}
-
-extension MainCoordidnator: Equatable, Hashable {
-  static func == (lhs: MainCoordidnator, rhs: MainCoordidnator) -> Bool {
-    lhs === rhs
-  }
-
-  func hash(into hasher: inout Hasher) {
-    hasher.combine(id)
   }
 }
 

@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 struct BookListView: View {
-  @StateObject var coordinator = MainCoordidnator()
+  @StateObject var coordinator = MainCoordidnator(isRoot: true)
   @EnvironmentObject var dataModel: DataModel
   var body: some View {
     ScrollView {
