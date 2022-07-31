@@ -10,7 +10,7 @@ import Combine
 
 extension BookDetailView {
   final class DataModel: ObservableObject {
-    @Published var book: Book = Book(imageURL: "noImage", title: "", author: "", isBookmarked: false)
+    @Published var book: Book = Book(imageURL: "back", title: "", author: "", isBookmarked: false)
     var title: String {
       book.title
     }

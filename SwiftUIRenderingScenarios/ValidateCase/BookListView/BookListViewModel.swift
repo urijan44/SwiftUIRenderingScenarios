@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 extension BookListView {
-  final class ViewModel: ObservableObject {
+  final class DataModel: ObservableObject {
     private let repository: BookListRepository
     @Published var books: [Book] = []
     @Published var searchText = ""

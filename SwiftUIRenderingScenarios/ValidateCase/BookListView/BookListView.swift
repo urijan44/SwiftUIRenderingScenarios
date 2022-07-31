@@ -18,7 +18,7 @@ struct BookListView: View {
   }
   
   @EnvironmentObject var dependancyObject: DependancyContainer
-  @EnvironmentObject var dataModel: ViewModel
+  @EnvironmentObject var dataModel: DataModel
   @State var root: NavigationRoot = .none
   @State var navigationTrigger = false
   var body: some View {

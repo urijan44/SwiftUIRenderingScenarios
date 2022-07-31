@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BookListCell: View {
-  @EnvironmentObject var viewModel: BookListView.ViewModel
+  @EnvironmentObject var viewModel: BookListView.DataModel
   @Binding var book: Book
   var body: some View {
     HStack(alignment: .top) {

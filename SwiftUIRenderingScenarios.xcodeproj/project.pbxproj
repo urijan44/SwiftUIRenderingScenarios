@@ -27,6 +27,7 @@
 		85D400C928928232009FC54C /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		85D400CE28928898009FC54C /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
 		85D400D128928909009FC54C /* BookRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRepository.swift; sourceTree = "<group>"; };
+		8A6E120B2896B42F00B4C325 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8A7971D72871CB9B00EEC73C /* SwiftUIRenderingScenarios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIRenderingScenarios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A7971DA2871CB9B00EEC73C /* SwiftUIRenderingScenariosApp.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = SwiftUIRenderingScenariosApp.swift; sourceTree = "<group>"; tabWidth = 2; };
 		8A7971DC2871CB9B00EEC73C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -113,6 +114,7 @@
 		8A7971D92871CB9B00EEC73C /* SwiftUIRenderingScenarios */ = {
 			isa = PBXGroup;
 			children = (
+				8A6E120B2896B42F00B4C325 /* Info.plist */,
 				8A7971DA2871CB9B00EEC73C /* SwiftUIRenderingScenariosApp.swift */,
 				8A7971DC2871CB9B00EEC73C /* ContentView.swift */,
 				8A7971EA2871F7C500EEC73C /* ViewInitCheck.swift */,
@@ -342,6 +344,7 @@
 				DEVELOPMENT_TEAM = XJXA3BQDMJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SwiftUIRenderingScenarios/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -372,6 +375,7 @@
 				DEVELOPMENT_TEAM = XJXA3BQDMJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SwiftUIRenderingScenarios/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
