@@ -34,3 +34,5 @@ extension BookListView {
     }
   }
 }
+
+extension BookListView.DataModel: Bookmarkable {}

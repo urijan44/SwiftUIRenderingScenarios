@@ -12,12 +12,14 @@
 		85D400CA28928232009FC54C /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D400C928928232009FC54C /* Book.swift */; };
 		85D400CF28928898009FC54C /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D400CE28928898009FC54C /* BookDetailViewModel.swift */; };
 		85D400D228928909009FC54C /* BookRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D400D128928909009FC54C /* BookRepository.swift */; };
+		8A65BDCB2896E17600574F3F /* BookmarkListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A65BDCA2896E17600574F3F /* BookmarkListView.swift */; };
+		8A65BDCE2896FD2300574F3F /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 8A65BDCD2896FD2300574F3F /* OrderedCollections */; };
+		8A6E120D2896D27300B4C325 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E120C2896D27300B4C325 /* MainCoordinator.swift */; };
 		8A7971DB2871CB9B00EEC73C /* SwiftUIRenderingScenariosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7971DA2871CB9B00EEC73C /* SwiftUIRenderingScenariosApp.swift */; };
 		8A7971DD2871CB9B00EEC73C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7971DC2871CB9B00EEC73C /* ContentView.swift */; };
 		8A7971DF2871CB9C00EEC73C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A7971DE2871CB9C00EEC73C /* Assets.xcassets */; };
 		8A7971E22871CB9C00EEC73C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A7971E12871CB9C00EEC73C /* Preview Assets.xcassets */; };
 		8A7971E92871D17B00EEC73C /* BookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7971E82871D17B00EEC73C /* BookListView.swift */; };
-		8A7971EB2871F7C500EEC73C /* ViewInitCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7971EA2871F7C500EEC73C /* ViewInitCheck.swift */; };
 		8A7971ED287210B900EEC73C /* BookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7971EC287210B900EEC73C /* BookDetailView.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,14 +29,15 @@
 		85D400C928928232009FC54C /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		85D400CE28928898009FC54C /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
 		85D400D128928909009FC54C /* BookRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRepository.swift; sourceTree = "<group>"; };
+		8A65BDCA2896E17600574F3F /* BookmarkListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkListView.swift; sourceTree = "<group>"; };
 		8A6E120B2896B42F00B4C325 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8A6E120C2896D27300B4C325 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		8A7971D72871CB9B00EEC73C /* SwiftUIRenderingScenarios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIRenderingScenarios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A7971DA2871CB9B00EEC73C /* SwiftUIRenderingScenariosApp.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = SwiftUIRenderingScenariosApp.swift; sourceTree = "<group>"; tabWidth = 2; };
 		8A7971DC2871CB9B00EEC73C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8A7971DE2871CB9C00EEC73C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A7971E12871CB9C00EEC73C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8A7971E82871D17B00EEC73C /* BookListView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = BookListView.swift; sourceTree = "<group>"; tabWidth = 2; };
-		8A7971EA2871F7C500EEC73C /* ViewInitCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewInitCheck.swift; sourceTree = "<group>"; };
 		8A7971EC287210B900EEC73C /* BookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -43,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A65BDCE2896FD2300574F3F /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +60,7 @@
 				85D400CB2892823F009FC54C /* Model */,
 				85D400CC28928249009FC54C /* BookListView */,
 				85D400CD2892825B009FC54C /* BookDetailView */,
+				8A65BDC92896E15700574F3F /* BookmarkListView */,
 			);
 			path = ValidateCase;
 			sourceTree = "<group>";
@@ -95,6 +100,14 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		8A65BDC92896E15700574F3F /* BookmarkListView */ = {
+			isa = PBXGroup;
+			children = (
+				8A65BDCA2896E17600574F3F /* BookmarkListView.swift */,
+			);
+			path = BookmarkListView;
+			sourceTree = "<group>";
+		};
 		8A7971CE2871CB9B00EEC73C = {
 			isa = PBXGroup;
 			children = (
@@ -117,7 +130,7 @@
 				8A6E120B2896B42F00B4C325 /* Info.plist */,
 				8A7971DA2871CB9B00EEC73C /* SwiftUIRenderingScenariosApp.swift */,
 				8A7971DC2871CB9B00EEC73C /* ContentView.swift */,
-				8A7971EA2871F7C500EEC73C /* ViewInitCheck.swift */,
+				8A6E120C2896D27300B4C325 /* MainCoordinator.swift */,
 				856AA771289399FA001E30CE /* ValidateCase */,
 				8A7971DE2871CB9C00EEC73C /* Assets.xcassets */,
 				8A7971E02871CB9C00EEC73C /* Preview Content */,
@@ -149,6 +162,9 @@
 			dependencies = (
 			);
 			name = SwiftUIRenderingScenarios;
+			packageProductDependencies = (
+				8A65BDCD2896FD2300574F3F /* OrderedCollections */,
+			);
 			productName = SwiftUIRenderingScenarios;
 			productReference = 8A7971D72871CB9B00EEC73C /* SwiftUIRenderingScenarios.app */;
 			productType = "com.apple.product-type.application";
@@ -177,6 +193,9 @@
 				Base,
 			);
 			mainGroup = 8A7971CE2871CB9B00EEC73C;
+			packageReferences = (
+				8A65BDCC2896FD2300574F3F /* XCRemoteSwiftPackageReference "swift-collections" */,
+			);
 			productRefGroup = 8A7971D82871CB9B00EEC73C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -208,10 +227,11 @@
 				85D400D228928909009FC54C /* BookRepository.swift in Sources */,
 				8A7971E92871D17B00EEC73C /* BookListView.swift in Sources */,
 				8A7971DD2871CB9B00EEC73C /* ContentView.swift in Sources */,
+				8A6E120D2896D27300B4C325 /* MainCoordinator.swift in Sources */,
+				8A65BDCB2896E17600574F3F /* BookmarkListView.swift in Sources */,
 				8A7971ED287210B900EEC73C /* BookDetailView.swift in Sources */,
 				8A7971DB2871CB9B00EEC73C /* SwiftUIRenderingScenariosApp.swift in Sources */,
 				85D400C82892821A009FC54C /* BookListViewModel.swift in Sources */,
-				8A7971EB2871F7C500EEC73C /* ViewInitCheck.swift in Sources */,
 				85D400CF28928898009FC54C /* BookDetailViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,6 +437,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8A65BDCC2896FD2300574F3F /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8A65BDCD2896FD2300574F3F /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8A65BDCC2896FD2300574F3F /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8A7971CF2871CB9B00EEC73C /* Project object */;
 }

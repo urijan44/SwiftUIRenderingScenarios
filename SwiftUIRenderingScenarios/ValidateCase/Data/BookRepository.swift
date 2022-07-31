@@ -6,10 +6,18 @@
 //
 
 import Foundation
-final class BookListRepository {
+
+protocol BookListRepositoryInterface {
+  func updateBook(book: Book)
+  func fetchBook(keyword: String) -> [Book]
+  func fetchBook(id: String) -> Book?
+}
+
+final class BookListRepository: BookListRepositoryInterface {
+  static let shared = BookListRepository()
   private var booksMap: [String: Book] = [:]
   
-  init() {
+  private init() {
     [
       Book(imageURL: "book1", title: "파친코", author: "이민진", isBookmarked: false),
       Book(imageURL: "book2", title: "돈, 뜨겁게 사랑하고 차갑게 다루어라", author: "앙드레 코스톨라니", isBookmarked: false),
@@ -32,8 +40,8 @@ final class BookListRepository {
       book.title.contains(keyword)
     }
   }
-  
-  func currentBook(book: Book) -> Book? {
-    booksMap[book.id]
+
+  func fetchBook(id: String) -> Book? {
+    booksMap[id]
   }
 }

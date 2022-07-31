@@ -8,31 +8,18 @@
 import SwiftUI
 import Combine
 
-
-//MARK: - View
 struct BookListView: View {
-  
-  enum NavigationRoot {
-    case bookDetail(book: Binding<Book>)
-    case none
-  }
-  
-  @EnvironmentObject var dependancyObject: DependancyContainer
+  @StateObject var coordinator = MainCoordidnator()
   @EnvironmentObject var dataModel: DataModel
-  @State var root: NavigationRoot = .none
-  @State var navigationTrigger = false
   var body: some View {
     ScrollView {
       VStack {
-        navigationLinkSection()
+        coordinator.navigationLinkSection()
         ForEach($dataModel.books, id: \.id) { book in
-          BookListCell(book: book)
+          BookListCell<DataModel>(book: book)
             .environmentObject(dataModel)
             .onTapGesture {
-              root = .bookDetail(book: book)
-              DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                navigationTrigger.toggle()
-              }
+              coordinator.showBookDetailView(book: book)
             }
         }
       }
@@ -41,23 +28,18 @@ struct BookListView: View {
       .navigationTitle("Books")
       .navigationBarTitleDisplayMode(.large)
     }
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        Button {
+          coordinator.showCart()
+        } label: {
+          Image(systemName: "bookmark.fill")
+            .foregroundColor(.black)
+        }
+      }
+    }
     .onAppear {
       dataModel.fetch()
-    }
-  }
-  
-  @ViewBuilder
-  func navigationLinkSection() -> some View {
-    switch root {
-    case .none:
-      EmptyView()
-    case .bookDetail(let book):
-      NavigationLink(isActive: $navigationTrigger) {
-        BookDetailView(book: book)
-          .environmentObject(dependancyObject.bookDetailViewConfiguration)
-      } label: {
-        EmptyView()
-      }
     }
   }
 }

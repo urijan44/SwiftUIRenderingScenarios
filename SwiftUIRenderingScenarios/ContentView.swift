@@ -9,12 +9,14 @@ import SwiftUI
 import Combine
 
 struct ContentView: View {
-  @EnvironmentObject var dependancyContainer: DependancyContainer
+  let dependancyContainer = DependancyContainer()
+  let coordinator = MainCoordidnator()
   var body: some View {
     NavigationView {
       BookListView()
+        .environmentObject(coordinator)
         .environmentObject(dependancyContainer.bookListViewConfiguration)
-        .environmentObject(dependancyContainer)
+        .navigationViewStyle(.stack)
     }
   }
 }
