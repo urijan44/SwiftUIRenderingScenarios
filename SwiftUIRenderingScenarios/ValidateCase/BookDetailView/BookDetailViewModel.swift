@@ -10,7 +10,8 @@ import Combine
 
 extension BookDetailView {
   final class DataModel: ObservableObject {
-    @Published var book: Book = Book(imageURL: "noImage", title: "", author: "", isBookmarked: false)
+    @Published var book: Book = Book(imageURL: "no_image", title: "", author: "", isBookmarked: false)
+    
     var title: String {
       book.title
     }
@@ -36,12 +37,8 @@ extension BookDetailView {
       book.imageURL
     }
     
-    private let repository: BookListRepository
+    private var repository: BookRepositoryInterface?
     private var cancellable: Set<AnyCancellable> = []
-    
-    init(repository: BookListRepository) {
-      self.repository = repository
-    }
     
     func toogleBookmark() {
       book.isBookmarked.toggle()
@@ -51,13 +48,17 @@ extension BookDetailView {
     func setReview() {
       edit(book: book)
     }
-
+    
     private func edit(book: Book) {
-      repository.updateBook(book: book)
+      repository?.updateBook(book: book)
     }
     
     func fetchBook(book: Book) {
       self.book = book
+    }
+    
+    func setRepository(repository: BookRepositoryInterface) {
+      self.repository = repository
     }
   }
 }

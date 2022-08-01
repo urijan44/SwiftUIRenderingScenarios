@@ -19,18 +19,18 @@ struct SwiftUIRenderingScenariosApp: App {
 }
 
 final class DependancyContainer: ObservableObject {
-  let repository = BookListRepository()
-  lazy var bookListViewConfiguration: BookListView.ViewModel = makeBookListViewConfiguration()
-  lazy var bookDetailViewConfiguration = makeBookDetailViewConfiguration()
+  let repository = BookRepository()
+  lazy var bookListViewConfiguration: BookListView.DataModel = makeBookListViewConfiguration()
+//  lazy var bookDetailViewConfiguration = makeBookDetailViewConfiguration()
   
-  private func makeBookListViewConfiguration() -> BookListView.ViewModel {
-    let viewModel = BookListView.ViewModel(repository: repository)
+  private func makeBookListViewConfiguration() -> BookListView.DataModel {
+    let viewModel = BookListView.DataModel(repository: repository)
     return viewModel
   }
   
-  private func makeBookDetailViewConfiguration() -> BookDetailView.DataModel {
-    let viewModel = BookDetailView.DataModel(repository: repository)
-    return viewModel
-  }
+//  private func makeBookDetailViewConfiguration() -> BookDetailView.DataModel {
+//    let viewModel = BookDetailView.DataModel(repository: repository)
+//    return viewModel
+//  }
 }
 

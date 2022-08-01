@@ -10,9 +10,10 @@ import Combine
 
 struct BookDetailView: View {
   enum Field: Hashable {
-         case review
+    case review
   }
-  @EnvironmentObject var dataModel: DataModel
+  @EnvironmentObject var dependancyContainer: DependancyContainer
+  @StateObject var dataModel = DataModel()
   @FocusState private var focus: Field?
   @Binding var book: Book
   var body: some View {
@@ -31,7 +32,7 @@ struct BookDetailView: View {
                 .foregroundColor(.yellow)
             })
             .frame(maxWidth: .infinity, maxHeight: .infinity,  alignment: .bottomTrailing)
-
+            
           )
         Text(dataModel.title)
           .font(.body)
@@ -56,10 +57,11 @@ struct BookDetailView: View {
     .padding(.horizontal)
     .onAppear {
       focus = .review
+      dataModel.setRepository(repository: dependancyContainer.repository) 
       dataModel.fetchBook(book: book)
     }
   }
-
+  
   init(book: Binding<Book>) {
     self._book = book
   }

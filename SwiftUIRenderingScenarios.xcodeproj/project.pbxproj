@@ -17,7 +17,6 @@
 		8A7971DF2871CB9C00EEC73C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A7971DE2871CB9C00EEC73C /* Assets.xcassets */; };
 		8A7971E22871CB9C00EEC73C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A7971E12871CB9C00EEC73C /* Preview Assets.xcassets */; };
 		8A7971E92871D17B00EEC73C /* BookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7971E82871D17B00EEC73C /* BookListView.swift */; };
-		8A7971EB2871F7C500EEC73C /* ViewInitCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7971EA2871F7C500EEC73C /* ViewInitCheck.swift */; };
 		8A7971ED287210B900EEC73C /* BookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7971EC287210B900EEC73C /* BookDetailView.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,7 +32,6 @@
 		8A7971DE2871CB9C00EEC73C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A7971E12871CB9C00EEC73C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8A7971E82871D17B00EEC73C /* BookListView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = BookListView.swift; sourceTree = "<group>"; tabWidth = 2; };
-		8A7971EA2871F7C500EEC73C /* ViewInitCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewInitCheck.swift; sourceTree = "<group>"; };
 		8A7971EC287210B900EEC73C /* BookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,7 +113,6 @@
 			children = (
 				8A7971DA2871CB9B00EEC73C /* SwiftUIRenderingScenariosApp.swift */,
 				8A7971DC2871CB9B00EEC73C /* ContentView.swift */,
-				8A7971EA2871F7C500EEC73C /* ViewInitCheck.swift */,
 				856AA771289399FA001E30CE /* ValidateCase */,
 				8A7971DE2871CB9C00EEC73C /* Assets.xcassets */,
 				8A7971E02871CB9C00EEC73C /* Preview Content */,
@@ -209,7 +206,6 @@
 				8A7971ED287210B900EEC73C /* BookDetailView.swift in Sources */,
 				8A7971DB2871CB9B00EEC73C /* SwiftUIRenderingScenariosApp.swift in Sources */,
 				85D400C82892821A009FC54C /* BookListViewModel.swift in Sources */,
-				8A7971EB2871F7C500EEC73C /* ViewInitCheck.swift in Sources */,
 				85D400CF28928898009FC54C /* BookDetailViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

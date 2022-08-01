@@ -9,18 +9,28 @@ import SwiftUI
 import Combine
 
 extension BookListView {
-  final class ViewModel: ObservableObject {
-    private let repository: BookListRepository
+  final class DataModel: ObservableObject {
+    
+    // MARK: Properties
+    private let repository: BookRepositoryInterface
+    
     @Published var books: [Book] = []
     @Published var searchText = ""
+    
     private var cancellables = Set<AnyCancellable>()
-    init(repository: BookListRepository) {
+    
+    // MARK: Methods
+    init(repository: BookRepositoryInterface) {
       self.repository = repository
+      bind()
+    }
+    
+    private func bind() {
       $searchText
         .debounce(for: 0.5, scheduler: DispatchQueue.main)
         .removeDuplicates()
         .map { [unowned self] word in
-          self.repository.fetchBook(keyword: word)
+          repository.fetchBook(keyword: word)
         }
         .assign(to: &$books)
     }
@@ -29,8 +39,11 @@ extension BookListView {
       books = repository.fetchBook(keyword: searchText)
     }
 
-    func setBookmark(book: Book) {
+    func updateBook(book: Book) {
       repository.updateBook(book: book)
     }
   }
 }
+
+
+

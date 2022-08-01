@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BookListCell: View {
-  @EnvironmentObject var viewModel: BookListView.ViewModel
+  @EnvironmentObject var viewModel: BookListView.DataModel
   @Binding var book: Book
   var body: some View {
     HStack(alignment: .top) {
@@ -31,7 +31,7 @@ struct BookListCell: View {
       Spacer()
       Button {
           book.isBookmarked.toggle()
-          viewModel.setBookmark(book: book)
+          viewModel.updateBook(book: book)
       } label: {
         Image(systemName: book.isBookmarked ? "bookmark.fill" : "bookmark")
           .foregroundColor(.yellow)

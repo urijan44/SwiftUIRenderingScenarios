@@ -6,7 +6,13 @@
 //
 
 import Foundation
-final class BookListRepository {
+
+protocol BookRepositoryInterface {
+  func updateBook(book: Book)
+  func fetchBook(keyword: String) -> [Book]
+}
+
+final class BookRepository: BookRepositoryInterface, ObservableObject {
   private var booksMap: [String: Book] = [:]
   
   init() {
@@ -26,14 +32,9 @@ final class BookListRepository {
   }
   
   func fetchBook(keyword: String) -> [Book] {
-    
     guard !keyword.isEmpty else { return Array(booksMap.values) }
     return booksMap.values.filter { book in
       book.title.contains(keyword)
     }
-  }
-  
-  func currentBook(book: Book) -> Book? {
-    booksMap[book.id]
   }
 }
