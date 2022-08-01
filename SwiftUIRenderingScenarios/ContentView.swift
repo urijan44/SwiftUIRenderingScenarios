@@ -16,7 +16,6 @@ struct ContentView: View {
       BookListView()
         .environmentObject(coordinator)
         .environmentObject(dependancyContainer.bookListViewConfiguration)
-        .navigationViewStyle(.stack)
     }
   }
 }

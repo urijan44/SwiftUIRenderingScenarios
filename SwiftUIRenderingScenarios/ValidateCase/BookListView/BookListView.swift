@@ -41,6 +41,9 @@ struct BookListView: View {
     .onAppear {
       dataModel.fetch()
     }
+    .onOpenURL { _ in
+      coordinator.showCart()
+    }
   }
 }
 

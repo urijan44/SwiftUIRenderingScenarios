@@ -13,7 +13,6 @@
 		85D400CF28928898009FC54C /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D400CE28928898009FC54C /* BookDetailViewModel.swift */; };
 		85D400D228928909009FC54C /* BookRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D400D128928909009FC54C /* BookRepository.swift */; };
 		8A65BDCB2896E17600574F3F /* BookmarkListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A65BDCA2896E17600574F3F /* BookmarkListView.swift */; };
-		8A65BDCE2896FD2300574F3F /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 8A65BDCD2896FD2300574F3F /* OrderedCollections */; };
 		8A6E120D2896D27300B4C325 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E120C2896D27300B4C325 /* MainCoordinator.swift */; };
 		8A7971DB2871CB9B00EEC73C /* SwiftUIRenderingScenariosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7971DA2871CB9B00EEC73C /* SwiftUIRenderingScenariosApp.swift */; };
 		8A7971DD2871CB9B00EEC73C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7971DC2871CB9B00EEC73C /* ContentView.swift */; };
@@ -30,7 +29,6 @@
 		85D400CE28928898009FC54C /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
 		85D400D128928909009FC54C /* BookRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRepository.swift; sourceTree = "<group>"; };
 		8A65BDCA2896E17600574F3F /* BookmarkListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkListView.swift; sourceTree = "<group>"; };
-		8A6E120B2896B42F00B4C325 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8A6E120C2896D27300B4C325 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		8A7971D72871CB9B00EEC73C /* SwiftUIRenderingScenarios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIRenderingScenarios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A7971DA2871CB9B00EEC73C /* SwiftUIRenderingScenariosApp.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = SwiftUIRenderingScenariosApp.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -46,7 +44,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A65BDCE2896FD2300574F3F /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,7 +124,6 @@
 		8A7971D92871CB9B00EEC73C /* SwiftUIRenderingScenarios */ = {
 			isa = PBXGroup;
 			children = (
-				8A6E120B2896B42F00B4C325 /* Info.plist */,
 				8A7971DA2871CB9B00EEC73C /* SwiftUIRenderingScenariosApp.swift */,
 				8A7971DC2871CB9B00EEC73C /* ContentView.swift */,
 				8A6E120C2896D27300B4C325 /* MainCoordinator.swift */,
@@ -163,7 +159,6 @@
 			);
 			name = SwiftUIRenderingScenarios;
 			packageProductDependencies = (
-				8A65BDCD2896FD2300574F3F /* OrderedCollections */,
 			);
 			productName = SwiftUIRenderingScenarios;
 			productReference = 8A7971D72871CB9B00EEC73C /* SwiftUIRenderingScenarios.app */;
@@ -194,7 +189,6 @@
 			);
 			mainGroup = 8A7971CE2871CB9B00EEC73C;
 			packageReferences = (
-				8A65BDCC2896FD2300574F3F /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = 8A7971D82871CB9B00EEC73C /* Products */;
 			projectDirPath = "";
@@ -437,25 +431,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		8A65BDCC2896FD2300574F3F /* XCRemoteSwiftPackageReference "swift-collections" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-collections.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		8A65BDCD2896FD2300574F3F /* OrderedCollections */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8A65BDCC2896FD2300574F3F /* XCRemoteSwiftPackageReference "swift-collections" */;
-			productName = OrderedCollections;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8A7971CF2871CB9B00EEC73C /* Project object */;
 }
