@@ -13,7 +13,6 @@ struct BookDetailView: View {
          case review
   }
   @StateObject var coordinator = MainCoordidnator()
-  @Environment(\.presentationMode) var presentationMode
   @EnvironmentObject var dataModel: DataModel
   @FocusState private var focus: Field?
   @Binding var book: Book

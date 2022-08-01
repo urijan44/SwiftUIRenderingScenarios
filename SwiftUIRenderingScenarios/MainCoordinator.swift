@@ -55,7 +55,6 @@ final class MainCoordidnator: ObservableObject {
           } else {
             linkTrigger = newTrigger
           }
-          print(isRoot)
         }
       )
     ) {
